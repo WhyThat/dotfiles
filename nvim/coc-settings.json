@@ -1,0 +1,13 @@
+{
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.preferences.hoverTarget": "preview",
+  "languageserver": {
+      "ocaml": {
+          "command": "opam",
+          "args": ["config", "exec", "--", "ocaml-language-server", "--stdio"],
+          "filetypes": ["ocaml", "reason"]
+      }
+  },
+  "tsserver.npm": "/home/mathieu/.fnm/node-versions/v10.16.3/installation/bin/npm",
+  "eslint.options": {"configFile": ".eslintrc.json"}
+}

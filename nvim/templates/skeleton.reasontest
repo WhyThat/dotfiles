@@ -1,0 +1,8 @@
+open Jest;
+
+describe("CssUtils", () => {
+  Expect.(
+    test("mapOrNoRules: with None", () => {
+      expect() |> toEqual(Css.empty([]))
+    })
+});
