@@ -1,0 +1,49 @@
+snippet cm
+module ${1: ModuleName} = {
+	$0
+}
+endsnippet
+
+snippet wrapm "Wrap in module" b
+module ${1: ModuleName} = {
+	${VISUAL}
+}
+endsnippet
+
+snippet cc "Create component" b
+[@react.component]
+let make = ($1) => {
+	React.null;$0
+}
+endsnippet
+
+snippet l1 "Js.log" b
+Js.log($1);$0
+endsnippet
+
+snippet l2 "Js.log2" b
+Js.log2($1, $2);$0
+endsnippet
+
+snippet l3 "Js.log3" b
+Js.log3($1, $2);$0
+endsnippet
+
+snippet uru "ReactUpdate.useReducer" b
+let (${1:_state}, ${2:_dispacth}) = ReactUpdate.useReducer(${3:state}, ${4:(state, action) => state})$0
+endsnippet
+
+
+snippet ur "React.useReducer" b
+let (${1:_state}, ${2:_dispacth}) = React.useReducer(${3:(state, action) => state}, ${4:state})$0
+endsnippet
+
+snippet switch "switch"
+switch(${1:val}) {
+	| ${2:case} => ${3:return}$0
+};
+endsnippet
+
+snippet | "case" b
+| $2 => $3$0
+endsnippet

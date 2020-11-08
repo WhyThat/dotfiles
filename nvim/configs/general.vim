@@ -1,20 +1,8 @@
-" Disallow detection of filetypes
-filetype off
 set autoread
-au CursorHold * checktime
+au BufWinEnter * checktime
 
-
-function! Install ()
-  :source ~/.config/nvim/ini
-  :PlugUpgrade
-  :PlugInstall
-  :PlugClean
-endfunction
-
-autocmd! BufWritePost plugin_list.vim :call Install()
-
-filetype plugin indent on    " required
-runtime macros/matchit.vim
+" filetype plugin indent on    " required
+" runtime macros/matchit.vim
 
 syntax enable
 
@@ -29,22 +17,6 @@ endif
 
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
-
-" #TEMPLATES {{{
-" Prefill new files created by vim with contents from the following templates
-augroup templates
-  autocmd BufNewFile *.html 0r ~/.config/nvim/templates/skeleton.html
-  autocmd BufNewFile *.scss 0r ~/.config/nvim/templates/skeleton.scss
-  autocmd BufNewFile *.css 0r ~/.config/nvim/templates/skeleton.scss
-  autocmd BufNewFile *.rs 0r ~/.config/nvim/templates/skeleton.rs
-  autocmd BufNewFile LICENSE 0r ~/.config/nvim/templates/skeleton.LICENCE
-  autocmd BufNewFile .gitignore 0r ~/.config/nvim/templates/skeleton.gitignore
-  autocmd BufNewFile .stylelintrc.json 0r ~/.config/nvim/templates/skeleton.stylelintrc
-  autocmd BufNewFile .eslintrc.json 0r ~/.config/nvim/templates/skeleton.eslintrc
-  autocmd BufNewFile .prettierrc.json 0r ~/.config/nvim/templates/skeleton.prettierrc
-  autocmd BufNewFile *_test.re 0r ~/.config/nvim/templates/skeleton.reasontest
-augroup END
-"}}}
 
 " Stop concealing quotes in JSON
 let g:vim_json_syntax_conceal = 0
@@ -105,7 +77,7 @@ set number relativenumber
 
 " Show Invisibles
 set list
-set listchars=tab:→→,eol:¬,space:.
+set listchars=tab:→→,eol:¬
 
 " Automatically hide buffer with unsaved changes without showing warning
 set hidden
@@ -122,6 +94,11 @@ set ignorecase
 
 " Jump to match when searching
 set incsearch
+set inccommand=split
+
+if has('mouse')
+    set mouse=a
+endif
 
 hi NonText guifg=#4a4a59
 hi SpecialKey guifg=white guibg=#cc0000
@@ -138,4 +115,18 @@ au BufRead,BufNewFile,BufReadPost *.json set syntax=json
 
 " Rainbow.vim
 let g:rainbow_active = 1
+
+let g:netrw_banner       = 0
+let g:netrw_liststyle    = 3
+let g:netrw_sort_options = 'i'
+
+
+hi ActiveWindow ctermbg=16 | hi InactiveWindow ctermbg=233
+set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+
+hi ActiveWindow ctermbg=16 | hi InactiveWindow ctermbg=233
+set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+
+hi ActiveWindow ctermbg=16 | hi InactiveWindow ctermbg=233
+set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 

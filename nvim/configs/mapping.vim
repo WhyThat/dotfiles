@@ -1,6 +1,3 @@
-" Change leader key from \ to ,
-let mapleader = ","
-
 " MOVING LINES
 " Normal mode
 nnoremap <C-j> :m .+1<CR>==
@@ -27,22 +24,10 @@ nnoremap <leader>q :Bwipeout<CR>
 nnoremap <leader>Q :Bwipeout!<CR>
 
 " turn off search highlights
-noremap <leader><space> :set hlsearch! hlsearch?<CR>
+" noremap <leader><space> :set hlsearch! hlsearch?<CR>
 
 " Reload Vim config
 nnoremap <Leader>r :so ~/.config/nvim/init.vim<CR>
-
-" Switching tabs quickly
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
 
 nnoremap <C-left> :tabprevious<CR>
 nnoremap <C-right> :tabnext<CR>
@@ -52,9 +37,9 @@ nnoremap <leader>W :tabclose<CR>
 
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap <silent> <space>] *
-nnoremap <silent> <space>[ #
 
+" subtitute the word under cursor
+nmap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
 " Deal with split
 
@@ -63,6 +48,10 @@ nnoremap <leader>v :vsp<cr>
 
 ",h splits horizontally
 nnoremap <leader>x :split<cr>
+
+" / perform a very magic search
+nnoremap / /\v
+vnoremap / /\v
 
 if has('nvim')
   " Terminal mode:
@@ -90,3 +79,4 @@ endif
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
+
