@@ -13,6 +13,6 @@ function! s:Test()
 
   if match(l:file, '\v(Spec|Test|-spec|\.spec|_spec|-test|\.test|_test|_Test)\.(js|jsx|ts|tsx|re)$') != -1 ||
         \ match(l:file, '\v/__tests__|tests?/.+\.(js|jsx|ts|tsx)$') != -1
-    noautocmd set filetype+=jest
+    noautocmd set filetype+=.jest
   endif
 endfunction

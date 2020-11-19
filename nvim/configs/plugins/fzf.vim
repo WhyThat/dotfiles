@@ -1,7 +1,7 @@
 " Find files
 " Fzf: {{{
 
-let $BAT_THEME='GitHub'
+" let $BAT_THEME='GitHub'
 let $FZF_DEFAULT_COMMAND='rg --no-ignore-vcs --glob "!.git/*" --glob "!node_modules/*" --files --hidden '
 let g:fzf_command_prefix = 'Fzf'
 nnoremap <Leader>fb  :FzfBuffers<CR>

@@ -23,9 +23,11 @@ Plug 'rakr/vim-one'
 
 " Autocompletion & Intellisense: {{{
 
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'Shougo/echodoc.vim'
   Plug 'SirVer/ultisnips'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
 
 
 " }}}

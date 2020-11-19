@@ -13,7 +13,7 @@ function! s:Stories()
 
   if match(l:file, '\v(Stories)\.(js|jsx|ts|tsx|re)$') != -1 ||
         \ match(l:file, '\v/__stories|tests?/.+\.(js|jsx|ts|tsx|re)$') != -1
-    noautocmd set filetype+=stories
+    noautocmd set filetype+=.stories
   endif
 endfunction
 

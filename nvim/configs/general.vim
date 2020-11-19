@@ -130,3 +130,6 @@ set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 hi ActiveWindow ctermbg=16 | hi InactiveWindow ctermbg=233
 set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 
+
+" autocmd BufEnter * lua require'completion'.on_attach()
+
