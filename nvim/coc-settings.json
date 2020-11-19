@@ -4,9 +4,10 @@
   "coc.preferences.echodocSupport": true,
   "languageserver": {
     "ocaml": {
-      "command": "opam",
+      "command": "ocamllsp",
       "args": ["config", "exec", "--", "ocaml-language-server", "--stdio"],
-      "filetypes": ["ocaml", "reason", "reason.jest",  "reason.stories", "reason.react"]
+      "filetypes": ["ocaml", "reason", "reason.jest",  "reason.stories", "reason.react"],
+    "rootPattern": [ ".merlin", "package.json" ]
     },
     "haskell": {
       "command": "haskell-language-server-wrapper",
