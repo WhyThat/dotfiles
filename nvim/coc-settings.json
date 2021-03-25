@@ -1,19 +1,27 @@
 {
   "coc.preferences.useQuickfixForLocations": true,
-  "coc.preferences.hoverTarget": "preview",
+  "coc.preferences.hoverTarget": "float",
   "coc.preferences.echodocSupport": true,
+  "suggest.floatEnable": true,
   "languageserver": {
-    "ocaml": {
-      "command": "ocamllsp",
-      "args": ["config", "exec", "--", "ocaml-language-server", "--stdio"],
-      "filetypes": ["ocaml", "reason", "reason.jest",  "reason.stories", "reason.react"],
-    "rootPattern": [ ".merlin", "package.json" ]
-    },
-    "haskell": {
-      "command": "haskell-language-server-wrapper",
-      "args": ["--lsp"],
-      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
-      "filetypes": ["haskell", "lhaskell"]
+//    "ocaml": {
+//      "command": "ocamllsp",
+//      "args": ["config", "exec", "--", "ocaml-language-server", "--stdio"],
+//      "filetypes": ["ocaml", "reason", "reason.jest",  "reason.stories", "reason.react"],
+//    "rootPattern": [ ".merlin", "package.json" ]
+//    },
+//    "haskell": {
+//      "command": "haskell-language-server-wrapper",
+//      "args": ["--lsp"],
+//      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+//      "filetypes": ["haskell", "lhaskell"]
+//    }
+   "rescript": {
+      "enable": true,
+      "module": "~/.local/share/nvim/plugged/vim-rescript/rescript-vscode/extension/server/out/server.js",
+      "args": ["--node-ipc"],
+      "filetypes": ["rescript"],
+      "rootPatterns": ["bsconfig.json"]
     }
   },
   "tsserver.npm": "/home/mathieu/.fnm/node-versions/v10.16.3/installation/bin/npm",

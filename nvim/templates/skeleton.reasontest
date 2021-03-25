@@ -2,6 +2,8 @@ open Jest;
 
 describe("", () => {
   Expect.(test("", () => {
-            expect() |> toEqual()
-          }))
+    let result = "";
+    let expectedResult = "";
+    expect() |> toEqual()
+  }))
 });

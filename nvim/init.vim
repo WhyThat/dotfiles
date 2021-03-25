@@ -11,8 +11,6 @@ augroup END
 nnoremap <Space> <Nop>
 let g:mapleader = " "
 
-nnoremap <leader>i iHello World<esc>
-
 " WARNING: Hard coding the location of my dotfiles is brittle
 let g:dotfiles = strlen($DOTFILES) ? $DOTFILES : '~/dotfiles'
 let g:vim_dir = g:dotfiles . '/nvim'
@@ -36,4 +34,21 @@ runtime configs/statusline.vim
 runtime templates/template.vim
 runtime keys.vim
 
+
 runtime! configs/plugins/*.vim
+lua require("lsp_config")
+nnoremap <silent>K :Lspsaga hover_doc<CR>
+set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+
+" Hooking up the ReScript autocomplete function
+" set omnifunc=rescript#Complete
+
+" autocmd FileType rescript nnoremap <silent> <buffer> <leader>f :RescriptFormat<CR>
+" autocmd FileType rescript nnoremap <silent> <buffer> K :RescriptTypeHint<CR>
+" autocmd FileType rescript nnoremap <silent> <buffer> <leader>b :RescriptBuild<CR>
+" autocmd FileType rescript nnoremap <silent> <buffer> gd :RescriptJumpToDefinition<CR>
+" " When preview is enabled, omnicomplete will display additional
+" " information for a selected item
+" set completeopt+=preview

@@ -40,7 +40,7 @@ nnoremap N Nzz
 
 " subtitute the word under cursor
 nmap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
-
+nmap cp :let @+ = expand("%")<cr>
 " Deal with split
 
 ",v splits vertically
@@ -80,3 +80,6 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
+nmap <leader>go :!git oops<CR>
+
+nmap <leader>ds :!update-ds<CR>
