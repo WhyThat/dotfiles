@@ -17,7 +17,7 @@ nnoremap <Leader>gb  :FzfGBranches<CR>
 " nnoremap <Leader>ff  :FzfGitFiles --exclude-standard --others --cached<CR>
 nnoremap <Leader>fN  :FzfFiles node_modules/<CR>
 " nmap // :FzfBLines<CR>
-nmap ?? :FzfRg!<space>
+" nmap ?? :FzfRg!<space>
 autocmd FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " }}}

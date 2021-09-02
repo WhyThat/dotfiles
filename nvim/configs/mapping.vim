@@ -20,14 +20,14 @@ nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>s :mksession!<CR>
 
 " Delete buffer completely without messing up window layout
-nnoremap <leader>q :Bwipeout<CR>
-nnoremap <leader>Q :Bwipeout!<CR>
+nnoremap <leader>q :Bw<CR>
+nnoremap <leader>Q :Bw!<CR>
 
 " turn off search highlights
 " noremap <leader><space> :set hlsearch! hlsearch?<CR>
 
 " Reload Vim config
-nnoremap <Leader>r :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>r :so ~/.config/nvim/init.vim<CR>:VimadeRedraw<CR>
 
 nnoremap <C-left> :tabprevious<CR>
 nnoremap <C-right> :tabnext<CR>
@@ -83,3 +83,15 @@ endif
 nmap <leader>go :!git oops<CR>
 
 nmap <leader>ds :!update-ds<CR>
+nmap <leader>n :NvimTreeToggle<CR>
+nmap <leader>? :NvimTreeFind <CR>
+
+nnoremap <silent> gb :BufferPick<CR>
+
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+
+nmap gx :silent !firefox <c-r><c-a><cr>
+nmap gtg :silent !firefox https://github.com/<c-r><c-a><cr>
+
+nmap gm :GitMessenger<CR>

@@ -24,12 +24,36 @@ let g:vim_json_syntax_conceal = 0
 " Enable JSX syntax highlighting in .js files
 let g:jsx_ext_required = 0
 
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
 
+
+augroup numbertoggle
+  let s:auto_rel = 1
+  function! ToggleNumber()
+    if (s:auto_rel == 1)
+      let s:auto_rel = 0
+      set norelativenumber
+    else
+      let s:auto_rel = 1
+      set relativenumber
+    endif
+  endfunction
+
+  function! OnLeave()
+    if (s:auto_rel == 1)
+      set relativenumber
+    endif
+  endfunction
+
+  function! OnEnter()
+    if (s:auto_rel == 1)
+      set norelativenumber
+    endif
+  endfunction
+
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * call OnLeave()
+  autocmd BufLeave,FocusLost,InsertEnter   * call OnEnter()
+augroup END
 
 " More natural split opening.
 set splitbelow
@@ -72,9 +96,6 @@ set wildignore+=**/node_modules/**,**/dist/**,**_site/**,*.swp,*.png,*.jpg,*.gif
 " Use the system register for all cut yank and paste operations
 set clipboard=unnamedplus
 
-" Toggle Hybrid Numbers in insert and normal mode
-set number relativenumber
-
 " Show Invisibles
 set list
 set listchars=tab:→→,eol:¬
@@ -97,7 +118,7 @@ set incsearch
 set inccommand=split
 
 if has('mouse')
-    set mouse=a
+  set mouse=a
 endif
 
 hi NonText guifg=#4a4a59
@@ -119,17 +140,15 @@ let g:rainbow_active = 1
 let g:netrw_banner       = 0
 let g:netrw_liststyle    = 3
 let g:netrw_sort_options = 'i'
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <C-j>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <silent> <C-space> <Plug>(completion_trigger)
+imap <tab> <Plug>(completion_smart_tab)
+imap <s-tab> <Plug>(completion_smart_s_tab)
 
-
-hi ActiveWindow ctermbg=16 | hi InactiveWindow ctermbg=233
-set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
-
-hi ActiveWindow ctermbg=16 | hi InactiveWindow ctermbg=233
-set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
-
-hi ActiveWindow ctermbg=16 | hi InactiveWindow ctermbg=233
-set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
-
-
-" autocmd BufEnter * lua require'completion'.on_attach()
-
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+let g:completion_enable_snippet = 'vim-vsnip'
+" Avoid showing message extra message when using completion
+" set shortmess+=c

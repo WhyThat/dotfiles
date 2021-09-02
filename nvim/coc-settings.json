@@ -17,7 +17,7 @@
 //      "filetypes": ["haskell", "lhaskell"]
 //    }
    "rescript": {
-      "enable": true,
+      "enable": false,
       "module": "~/.local/share/nvim/plugged/vim-rescript/rescript-vscode/extension/server/out/server.js",
       "args": ["--node-ipc"],
       "filetypes": ["rescript"],

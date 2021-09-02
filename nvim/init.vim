@@ -20,7 +20,6 @@ let g:vim_dir = g:dotfiles . '/nvim'
 filetype plugin indent on
 syntax enable
 set termguicolors     " enable true colors support
-set background=light
 " ----------------------------------------------------------------------
 " Plugin Configurations
 " ----------------------------------------------------------------------
@@ -28,27 +27,25 @@ set background=light
 " :h runtime - this fuzzy maches files within vim's runtime path
 runtime configs/plugins.vim
 runtime configs/general.vim
-runtime configs/highlight.vim
+" runtime configs/highlight.vim
 runtime configs/mapping.vim
 runtime configs/statusline.vim
 runtime templates/template.vim
-runtime keys.vim
-
 
 runtime! configs/plugins/*.vim
+lua require("global")
 lua require("lsp_config")
-nnoremap <silent>K :Lspsaga hover_doc<CR>
+lua require("galaxy")
+lua require("m-barbar")
+lua require("m-specs")
+lua require("ts-autotag")
+lua require("treesitter")
+lua require("refactoring2")
+
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-
-" Hooking up the ReScript autocomplete function
-" set omnifunc=rescript#Complete
-
-" autocmd FileType rescript nnoremap <silent> <buffer> <leader>f :RescriptFormat<CR>
-" autocmd FileType rescript nnoremap <silent> <buffer> K :RescriptTypeHint<CR>
-" autocmd FileType rescript nnoremap <silent> <buffer> <leader>b :RescriptBuild<CR>
-" autocmd FileType rescript nnoremap <silent> <buffer> gd :RescriptJumpToDefinition<CR>
-" " When preview is enabled, omnicomplete will display additional
-" " information for a selected item
-" set completeopt+=preview
+colorscheme doom-one
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+let g:tagalong_additional_filetypes = ['rescript']

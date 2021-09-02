@@ -47,3 +47,22 @@ endsnippet
 snippet | "case" b
 | $2 => $3$0
 endsnippet
+
+snippet describe "create describe"
+describe("$1", () => {
+	test("$2", () => {
+		let expectedResult = $3;
+		let result = $4;
+		expect(result) |> toEqual(expectedResult)
+	});
+});
+endsnippet
+
+
+snippet test "create test"
+	test("$1", () => {
+		let expectedResult = $2;
+		let result = $3;
+		expect(result) |> toEqual(expectedResult)
+	});
+endsnippet

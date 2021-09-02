@@ -10,22 +10,59 @@ function! PluginLoaded(plugin_name) abort
   return has_key(g:plugs, a:plugin_name) && stridx(&rtp, g:plugs[a:plugin_name].dir)
 endfunction
 
-Plug 'ayu-theme/ayu-vim' " or other package manager
-Plug 'rakr/vim-one'
 
 " Linting and Code Formatting
 " Syntax Highlighting: {{{
 
 Plug 'tpope/vim-markdown'
 Plug 'sheerun/vim-polyglot'
-
+Plug 'andymass/vim-matchup'
 "}}}
+" Status line
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'romgrk/barbar.nvim'
 
 " Autocompletion & Intellisense: {{{
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Shougo/echodoc.vim'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
+Plug 'norcalli/snippets.nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
+"
+" This variant will set up the mappings only for the *CURRENT* buffer.
+
+" There are only two keybindings specified by the suggested keymappings, which is <C-k> and <C-j>
+" They are exactly equivalent to:
+
+" <c-k> will either expand the current snippet at the word or try to jump to
+" the next position for the snippet.
+inoremap <c-k> <cmd>lua return require'snippets'.expand_or_advance(1)<CR>
+
+" <c-j> will jump backwards to the previous field.
+" If you jump before the first field, it will cancel the snippet.
+inoremap <c-j> <cmd>lua return require'snippets'.advance_snippet(-1)<CR>
 " Neovim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
@@ -33,8 +70,9 @@ Plug 'rescript-lang/vim-rescript'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'glepnir/lspsaga.nvim'
+Plug 'onsails/lspkind-nvim'
+Plug 'ray-x/lsp_signature.nvim'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " }}}
 
 
@@ -42,6 +80,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
+Plug 'ThePrimeagen/refactoring.nvim'
 " Motions
 " {{{
 
@@ -62,7 +101,6 @@ Plug 'sodapopcan/vim-twiggy'
 Plug 'junegunn/gv.vim'
 Plug 'stsewd/fzf-checkout.vim'
 "}}}
-
 " Deal with files
 " {{{
 
@@ -77,23 +115,24 @@ Plug 'kevinhwang91/rnvimr'
 " Appearance and Themes
 " {{{
 
-Plug 'gruvbox-community/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'miyakogi/conoline.vim'
 Plug 'luochen1990/rainbow'
-Plug 'gcmt/taboo.vim'
+Plug 'romgrk/doom-one.vim'
 Plug 'TaDaa/vimade'
-
+Plug 'gcmt/taboo.vim'
+Plug 'mhinz/vim-startify'
+Plug 'norcalli/nvim-colorizer.lua'
 " }}}
 
 " Test
 " {{{
 
-Plug 'janko/vim-test'
+" Plug 'janko/vim-test'
 
 " }}}
-
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'windwp/nvim-ts-autotag'
+Plug 'nvim-treesitter/playground'
+Plug 'nkrkv/nvim-treesitter-rescript'
 " Utilities
 " Basics: {{{
 
@@ -116,16 +155,19 @@ Plug 'embear/vim-localvimrc'
 " }}}
 " Deal with buffer {{{
 
-Plug 'moll/vim-bbye'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-dispatch'
 
 
-
+Plug 'unblevable/quick-scope'
+Plug 'metakirby5/codi.vim'
 " }}}
 Plug 'wincent/scalpel'
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'bagrat/vim-buffet'
+
+Plug 'edluffy/specs.nvim' " animate line when big jump
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'mbbill/undotree'
@@ -177,16 +219,16 @@ EOF
 
 " Built-in
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
-nnoremap <leader>ff :lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown({ width=0.65 }))<CR>
+nnoremap <leader>ff :lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown({ layout_config={width=0.65} }))<CR>
 nnoremap <Leader>fF :lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ width=0.65 }))<CR>
 nnoremap <leader>fb :lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ width=0.65 }))<CR>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown({ width=0.65 }))<cr>
+nnoremap ?? <cmd>lua require('telescope.builtin').live_grep()<CR>
 " arte project
 nnoremap <leader>fj :lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown({ cwd='/media/disk/home/mathieu/Sources/Arte/js-toolkit', width=0.65 }))<CR>
 nnoremap <leader>fr :lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown({ cwd='/media/disk/home/mathieu/Sources/Arte/Replay', width= 0.65 }))<CR>
 nnoremap <leader>fd :lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown({ cwd='/media/disk/home/mathieu/Sources/Arte/ARTE-DesignSystem', width= 0.65  }))<CR>
-" nnoremap <leader>fn :lua require('telescope.builtin').file_browser(require('telescope.themes').get_dropdown({}))<CR>
-" nnoremap <leader>fN :lua require('telescope.builtin').file_browser(require('telescope.themes').get_dropdown({cwd='node_modules'}))<CR>
+nnoremap <leader>fn :lua require('telescope.builtin').file_browser(require('telescope.themes').get_dropdown({}))<CR>
+nnoremap <leader>fN :lua require('telescope.builtin').file_browser(require('telescope.themes').get_dropdown({cwd='node_modules'}))<CR>
 "
 " LSP
 nnoremap <leader>ls :lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown({ width=0.65 }))<CR>
