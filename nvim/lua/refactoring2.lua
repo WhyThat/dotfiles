@@ -14,7 +14,7 @@ end
 -- you can extract this function and the helper above
 -- and then require the file and call the extracted function
 -- in the mappings below
-M = {}
+local M = {}
 M.refactors = function()
     local opts = require("telescope.themes").get_cursor() -- set personal telescope options
     require("telescope.pickers").new(opts, {
@@ -34,3 +34,5 @@ end
 vim.api.nvim_set_keymap("v", "<Leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
 vim.api.nvim_set_keymap("v", "<Leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
 vim.api.nvim_set_keymap("v", "<Leader>rt", [[ <Esc><Cmd>lua M.refactors()<CR>]], {noremap = true, silent = true, expr = false})
+
+return M

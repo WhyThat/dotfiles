@@ -141,11 +141,11 @@ let g:netrw_banner       = 0
 let g:netrw_liststyle    = 3
 let g:netrw_sort_options = 'i'
 " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <C-j>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-imap <silent> <C-space> <Plug>(completion_trigger)
-imap <tab> <Plug>(completion_smart_tab)
-imap <s-tab> <Plug>(completion_smart_s_tab)
+" inoremap <expr> <C-j>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" imap <silent> <C-space> <Plug>(completion_trigger)
+" imap <tab> <Plug>(completion_smart_tab)
+" imap <s-tab> <Plug>(completion_smart_s_tab)
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect

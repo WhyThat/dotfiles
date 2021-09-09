@@ -29,18 +29,19 @@ runtime configs/plugins.vim
 runtime configs/general.vim
 " runtime configs/highlight.vim
 runtime configs/mapping.vim
-runtime configs/statusline.vim
+" runtime configs/statusline.vim
 runtime templates/template.vim
 
 runtime! configs/plugins/*.vim
+lua require("plugins")
 lua require("global")
-lua require("lsp_config")
-lua require("galaxy")
-lua require("m-barbar")
-lua require("m-specs")
-lua require("ts-autotag")
-lua require("treesitter")
-lua require("refactoring2")
+" lua require("lsp_config")
+" lua require("galaxy")
+" lua require("m-barbar")
+" lua require("m-specs")
+" lua require("ts-autotag")
+" lua require("treesitter")
+" lua require("refactoring2")
 
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
@@ -49,3 +50,20 @@ colorscheme doom-one
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 let g:tagalong_additional_filetypes = ['rescript']
+
+function! s:IsFirenvimActive(event) abort
+  if !exists('*nvim_get_chan_info')
+    return 0
+  endif
+  let l:ui = nvim_get_chan_info(a:event.chan)
+  return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
+      \ l:ui.client.name =~? 'Firenvim'
+endfunction
+
+function! OnUIEnter(event) abort
+  if s:IsFirenvimActive(a:event)
+    :BarbarDisable
+    set laststatus=0
+  endif
+endfunction:
+autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
