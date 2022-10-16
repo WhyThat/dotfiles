@@ -2,10 +2,16 @@
 " Normal mode
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
-
 " Visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" nnoremap j gj
+" nnoremap k gk
+
+nnoremap ]<space> o<ESC>d^==
+nnoremap [<space> O<ESC>d^==
+
 
 " QuickFix List
 nnoremap <leader>co :cw<CR>
@@ -75,3 +81,17 @@ nmap gx :silent !firefox <c-r><c-a><cr>
 nmap gtg :silent !firefox https://github.com/<c-r><c-a><cr>
 
 nmap gm :GitMessenger<CR>
+
+nnoremap <leader>1 :lua require('harpoon.ui').nav_file(1)<CR>
+nnoremap <leader>2 :lua require('harpoon.ui').nav_file(2)<CR>
+nnoremap <leader>3 :lua require('harpoon.ui').nav_file(3)<CR>
+nnoremap <leader>4 :lua require('harpoon.ui').nav_file(4)<CR>
+nnoremap <leader>t :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <leader>fh :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>ha :lua require("harpoon.mark").add_file()<CR>
+
+
+nnoremap <leader>jQ <C-w>j:q<CR>
+nnoremap <leader>lQ <C-w>l:q<CR>
+nnoremap <leader>kQ <C-w>k:q<CR>
+nnoremap <leader>jQ <C-w>h:q<CR>

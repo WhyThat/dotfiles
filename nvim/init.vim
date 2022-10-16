@@ -18,52 +18,32 @@ let g:vim_dir = g:dotfiles . '/nvim'
 " Essential Settings - Taken care of by Vim Plug
 "-----------------------------------------------------------------------
 filetype plugin indent on
-syntax enable
 set termguicolors     " enable true colors support
 " ----------------------------------------------------------------------
 " Plugin Configurations
 " ----------------------------------------------------------------------
-" Order matters here as the plugins should be loaded before the other setup
-" :h runtime - this fuzzy maches files within vim's runtime path
-runtime configs/plugins.vim
 runtime configs/general.vim
-" runtime configs/highlight.vim
 runtime configs/mapping.vim
-" runtime configs/statusline.vim
 runtime templates/template.vim
 
-runtime! configs/plugins/*.vim
 lua require("plugins")
+lua require("mat/theme")
+lua require("keybinding")
 lua require("global")
-" lua require("lsp_config")
-" lua require("galaxy")
-" lua require("m-barbar")
-" lua require("m-specs")
-" lua require("ts-autotag")
-" lua require("treesitter")
-" lua require("refactoring2")
 
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-colorscheme doom-one
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 let g:tagalong_additional_filetypes = ['rescript']
+imap <silent><script><expr> <C-G> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
 
-function! s:IsFirenvimActive(event) abort
-  if !exists('*nvim_get_chan_info')
-    return 0
-  endif
-  let l:ui = nvim_get_chan_info(a:event.chan)
-  return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
-      \ l:ui.client.name =~? 'Firenvim'
-endfunction
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
-function! OnUIEnter(event) abort
-  if s:IsFirenvimActive(a:event)
-    :BarbarDisable
-    set laststatus=0
-  endif
-endfunction:
-autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+command ToggleTheme lua require'mat.theme'.toggle()
+command SetLightTheme lua require'mat.theme'.setLight()
+command SetDarkTheme lua require'mat.theme'.setDark()
+command ToggleNumber call ToggleNumber()

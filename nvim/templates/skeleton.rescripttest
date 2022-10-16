@@ -1,0 +1,10 @@
+open Jest;
+
+describe("", () => {
+  Expect.(test("", () => {
+    let result = "";
+    let expectedResult = "";
+    expect() |> toEqual()
+  }))
+});
+

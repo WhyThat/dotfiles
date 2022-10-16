@@ -1,8 +1,7 @@
 set autoread
 au BufWinEnter * checktime
-
-" filetype plugin indent on    " required
-" runtime macros/matchit.vim
+set foldnestmax=3
+set cursorline
 
 syntax enable
 
@@ -23,8 +22,6 @@ let g:vim_json_syntax_conceal = 0
 
 " Enable JSX syntax highlighting in .js files
 let g:jsx_ext_required = 0
-
-
 
 augroup numbertoggle
   let s:auto_rel = 1
@@ -78,7 +75,7 @@ set noswapfile " No swap file
 set nobackup
 set nowritebackup
 
-set textwidth=80
+set textwidth=120
 set formatoptions+=t
 set colorcolumn=+1
 set showmatch
@@ -126,29 +123,11 @@ hi SpecialKey guifg=white guibg=#cc0000
 
 " Strip trailing whitespace from all files
 autocmd BufWritePre * %s/\s\+$//e
-autocmd BufWritePre * %s/\s\+$//e
-autocmd BufWritePre * %s/\s\+$//e
 
 " Automatically remove the preview window after autocompletion
 autocmd CompleteDone * pclose
 
 au BufRead,BufNewFile,BufReadPost *.json set syntax=json
 
-" Rainbow.vim
-let g:rainbow_active = 1
-
-let g:netrw_banner       = 0
-let g:netrw_liststyle    = 3
-let g:netrw_sort_options = 'i'
-" Use <Tab> and <S-Tab> to navigate through popup menu
-" inoremap <expr> <C-j>   pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" imap <silent> <C-space> <Plug>(completion_trigger)
-" imap <tab> <Plug>(completion_smart_tab)
-" imap <s-tab> <Plug>(completion_smart_s_tab)
-
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
-let g:completion_enable_snippet = 'vim-vsnip'
-" Avoid showing message extra message when using completion
-" set shortmess+=c

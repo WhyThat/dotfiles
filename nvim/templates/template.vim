@@ -8,6 +8,7 @@ augroup templates
   autocmd BufNewFile .stylelintrc.json 0r ~/.config/nvim/templates/skeleton.stylelintrc
   autocmd BufNewFile .eslintrc.json 0r ~/.config/nvim/templates/skeleton.eslintrc
   autocmd BufNewFile .prettierrc.json 0r ~/.config/nvim/templates/skeleton.prettierrc
+  autocmd BufNewFile *_test.res 0r ~/.config/nvim/templates/skeleton.rescripttest
   autocmd BufNewFile *_test.re 0r ~/.config/nvim/templates/skeleton.reasontest
 augroup END
 

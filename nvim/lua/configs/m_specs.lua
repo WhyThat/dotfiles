@@ -1,5 +1,5 @@
-require('specs').setup{
-    show_jumps  = true,
+require("specs").setup({
+    show_jumps = true,
     min_jump = 10,
     popup = {
         delay_ms = 0, -- delay before popup displays
@@ -7,11 +7,11 @@ require('specs').setup{
         blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
         width = 30,
         winhl = "PMenu",
-        fader = require('specs').linear_fader,
-        resizer = require('specs').shrink_resizer
+        fader = require("specs").linear_fader,
+        resizer = require("specs").shrink_resizer,
     },
     ignore_filetypes = {},
     ignore_buftypes = {
         nofile = true,
     },
-}
+})
