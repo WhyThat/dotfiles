@@ -1,7 +1,6 @@
 set autoread
 au BufWinEnter * checktime
 set foldnestmax=3
-set cursorline
 
 syntax enable
 

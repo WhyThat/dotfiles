@@ -31,35 +31,46 @@ npairs.remove_rule("```")
 
 npairs.add_rules({
     Rule("(", ")", { "-lua", "-ocaml", "-dune", "-query", "-scheme" }),
+})
+npairs.add_rules({
+    Rule("'", "'", "-rescript" )
+})
 
+npairs.add_rules({
     Rule("(", ")", "lua"):with_pair(cond.not_after_regex("[%{|%(]")),
+})
 
+npairs.add_rules({
     Rule("(", ")", { "ocaml", "query", "scheme" }):with_pair(cond.not_after_regex("%(")),
+})
 
+npairs.add_rules({
     Rule("$", "$", { "markdown", "rmd" }),
+})
 
-    Rule("'", "'"):with_pair(ts_conds.is_in_range(function(param)
-        if not param then
+npairs.add_rules({
+    Rule("<", ">", "rescript"):with_pair(ts_conds.is_in_range(function(params)
+        if not params then
             return false
         end
-        if vim.tbl_contains({ "type_parameters", "variant_parameters" }, param.type) then
-            return false
-        else
+        if params.type == "type_identifier" then
             return true
         end
+        return false
     end, function()
         local pos = vim.api.nvim_win_get_cursor(0)
-        return { pos[1] - 1, pos[2] }
+        return { pos[1] - 1, pos[2] - 1 }
     end)),
+})
 
-    Rule("'", "'", { "-rescript" }),
+npairs.add_rules({
     Rule("<", ">", { "rust", "typescript", "typescriptreact" }):with_pair(ts_conds.is_ts_node({
         "type_identifier",
         "parameters",
         "let_declaration",
-        -- 'type_arguments',
     })),
-
+})
+npairs.add_rules({
     Rule("<", ">", "lua"):with_pair(ts_conds.is_in_range(function(params)
         if not params then
             return false
@@ -77,17 +88,5 @@ npairs.add_rules({
         local pos = vim.api.nvim_win_get_cursor(0)
         return { pos[1] - 1, pos[2] - 1 }
     end)),
-
-    Rule("<", ">", "rescript"):with_pair(ts_conds.is_in_range(function(params)
-        if not params then
-            return false
-        end
-        if params.type == "type_identifier" then
-            return true
-        end
-        return false
-    end, function()
-        local pos = vim.api.nvim_win_get_cursor(0)
-        return { pos[1] - 1, pos[2] - 1 }
-    end)),
 })
+

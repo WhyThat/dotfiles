@@ -71,7 +71,7 @@ local treesitter = function(use)
             "windwp/nvim-ts-autotag",
             "code-biscuits/nvim-biscuits",
             "andymass/vim-matchup",
-            'David-Kunz/markid',
+            "David-Kunz/markid",
         },
     })
 
@@ -85,6 +85,7 @@ local telescope = function(use)
             "nvim-telescope/telescope.nvim",
             requires = {
                 "benfowler/telescope-luasnip.nvim",
+                "nvim-telescope/telescope-file-browser.nvim",
                 "nvim-lua/popup.nvim",
                 "nvim-lua/plenary.nvim",
                 "telescope-frecency.nvim",
@@ -126,7 +127,12 @@ local intellisense = function(use)
     use("nvim-lua/lsp_extensions.nvim")
     -- use("github/copilot.vim")
     use("sheerun/vim-polyglot")
-    use("L3MON4D3/LuaSnip")
+    use({
+        "L3MON4D3/LuaSnip",
+        config = function()
+            require("snips")
+        end,
+    })
     use({
         "rescript-lang/vim-rescript",
         "SmiteshP/nvim-navic",
@@ -134,17 +140,11 @@ local intellisense = function(use)
         {
             "neovim/nvim-lspconfig",
             config = function()
-                require("configs/lsp_setup")
+                require("configs/lsp")
             end,
         },
         "nvim-lua/lsp-status.nvim",
         "onsails/lspkind-nvim",
-        -- {
-        --     "ray-x/lsp_signature.nvim",
-        --     config = function()
-        --         require("lsp_signature").setup()
-        --     end,
-        -- },
     })
     use({
         "zbirenbaum/copilot.lua",
@@ -158,14 +158,6 @@ local intellisense = function(use)
     })
 
     use("tpope/vim-markdown")
-    -- use({
-    --     "zbirenbaum/copilot-cmp",
-    --     after = { "copilot.lua" },
-    --     config = function()
-    --         print("copilot-cmp")
-    --         require("copilot_cmp").setup()
-    --     end,
-    -- })
     use({
         "hrsh7th/nvim-cmp",
         requires = {
@@ -208,6 +200,17 @@ local git = function(use)
     use("rhysd/git-messenger.vim")
     use("mhinz/vim-signify")
     use("sindrets/diffview.nvim")
+    use({
+        "pwntester/octo.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+            "kyazdani42/nvim-web-devicons",
+        },
+        config = function()
+            require("octo").setup()
+        end,
+    })
 end
 
 local project = function(use)
@@ -229,28 +232,6 @@ packer.startup(function()
     motion(use)
     project(use)
 
-    -- use({
-    --     "nvim-orgmode/orgmode",
-    --     config = function()
-    --         require("orgmode").setup({
-    --             org_agenda_skip_deadline_if_done = true,
-    --             org_agenda_files = {
-    --                 "~/orgmode/agenda/*",
-    --                 "~/orgmode/todo/**/*",
-    --             },
-    --             org_default_notes_file = "~/orgmode/refile.org",
-    --             org_agenda_templates = {
-    --                 t = { description = "Task", template = "* TODO %?\n%u" },
-    --                 j = {
-    --                     description = "Jira",
-    --                     template = "%(return require('mat.org').createJiraTask())",
-    --                     target = "~/orgmode/todo/arte/jira.org",
-    --                 },
-    --             },
-    --         })
-    --     end,
-    -- })
-    --   -- explorer
     use({
         "kyazdani42/nvim-tree.lua",
         requires = "kyazdani42/nvim-web-devicons",
@@ -300,8 +281,6 @@ packer.startup(function()
     use("machakann/vim-highlightedyank")
 
     use("szw/vim-maximizer")
-
-    use("ThePrimeagen/harpoon")
 
     use({
         "AndrewRadev/splitjoin.vim",

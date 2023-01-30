@@ -143,8 +143,9 @@ require("nvim-treesitter.configs").setup({
 require("nvim-biscuits").setup({
     default_config = {
         toggle_keybind = "<leader>cb",
+        show_on_start = false,
         max_length = 120,
-        min_distance = 5,
+        min_distance = 15,
         prefix_string = " 📎 ",
     },
     language_config = {

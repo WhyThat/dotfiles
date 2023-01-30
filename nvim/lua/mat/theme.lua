@@ -4,14 +4,14 @@ vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
 -- Load the colorscheme
 vim.cmd([[colorscheme tokyonight]])
 
-local navic = require("nvim-navic")
+-- local navic = require("nvim-navic")
 require("lualine").setup({
     theme = "tokyonight",
-    sections = {
-        lualine_c = {
-            { navic.get_location, cond = navic.is_available },
-        },
-    },
+    -- sections = {
+    --     lualine_c = {
+    --         { navic.get_location, cond = navic.is_available },
+    --     },
+    -- },
 })
 
 local alacrittyTheme = {

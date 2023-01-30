@@ -3,8 +3,8 @@ POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
 ZSH_PATH="/home/mathieu/zsh"
 export ZSH="$ZSH_PATH/oh-my-zsh"
 
-source $ZSH/oh-my-zsh.sh
 source $ZSH_PATH/antigen.zsh
+source $ZSH/oh-my-zsh.sh
 source $ZSH_PATH/plugins.zsh
 source $ZSH_PATH/theme.zsh
 source $ZSH_PATH/aliases.sh

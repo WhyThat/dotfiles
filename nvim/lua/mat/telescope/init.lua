@@ -248,25 +248,8 @@ function M.help_tags()
     })
 end
 
-function M.search_all_files()
-    local t = vim.fn.expand("%:t:r")
-    require("telescope.builtin").find_files({
-        find_command = { "rg", "--no-ignore", "--files" },
-    })
-end
-
-function M.file_browser()
-    local opts
-
-    opts = {
-        sorting_strategy = "ascending",
-        scroll_strategy = "cycle",
-        layout_config = {
-            prompt_position = "top",
-        },
-    }
-
-    require("telescope.builtin").file_browser(opts)
+function M.file_browser(opts)
+    require 'telescope'.extensions.file_browser.file_browser(opts)
 end
 
 function M.git_status()
@@ -297,10 +280,11 @@ function M.search_only_certain_files()
     })
 end
 
-function M.lsp_references()
+function M.lspreferences()
     require("telescope.builtin").lsp_references({
         layout_strategy = "vertical",
         layout_config = {
+            width=0.9,
             prompt_position = "top",
         },
         sorting_strategy = "ascending",
@@ -310,8 +294,8 @@ end
 
 -- configure telescope to open lsp diagnostics_by_line
 function M.lsp_diagnostic()
-    local theme = themes.get_ivy({
-            previewer = false,
+    local theme = themes.get_dropdown({
+            previewer = true,
         -- layout_strategy = "vertical",
         -- layout_config = {
         --     prompt_position = "top",

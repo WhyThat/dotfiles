@@ -1,6 +1,6 @@
 P = function(v)
     print(vim.inspect(v))
-    return v
+    -- return v
 end
 
 if pcall(require, "plenary") then
