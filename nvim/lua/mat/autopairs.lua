@@ -33,7 +33,7 @@ npairs.add_rules({
     Rule("(", ")", { "-lua", "-ocaml", "-dune", "-query", "-scheme" }),
 })
 npairs.add_rules({
-    Rule("'", "'", "-rescript" )
+  Rule("'", "'", {"-rescript", "-norg", "-gitcommit"} )
 })
 
 npairs.add_rules({

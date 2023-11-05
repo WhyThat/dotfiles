@@ -1,5 +1,5 @@
 -- Disable filetype plugin
-vim.g.did_load_ftplugin = 1
+vim.g.did_load_ftplugin = 0
 
 vim.g.loaded_man = 1
 

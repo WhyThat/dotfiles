@@ -26,6 +26,12 @@ packer.init({
     package_root = util.join_paths(vim.fn.stdpath("data"), "site", "pack"),
 })
 
+local database = function(use)
+    -- Database
+    use({ "tpope/vim-dadbod" })
+    use({ "kristijanhusak/vim-dadbod-ui" })
+end
+
 local ui = function(use)
     use({
         "hoob3rt/lualine.nvim",
@@ -126,7 +132,7 @@ local intellisense = function(use)
     use("jose-elias-alvarez/nvim-lsp-ts-utils")
     use("nvim-lua/lsp_extensions.nvim")
     -- use("github/copilot.vim")
-    use("sheerun/vim-polyglot")
+    -- use("sheerun/vim-polyglot")
     use({
         "L3MON4D3/LuaSnip",
         config = function()
@@ -147,21 +153,35 @@ local intellisense = function(use)
         "onsails/lspkind-nvim",
     })
     use({
-        "zbirenbaum/copilot.lua",
-        event = { "VimEnter" },
+        "smjonas/inc-rename.nvim",
         config = function()
-            print("copilot")
-            require("copilot").setup()
+            require("inc_rename").setup()
+        end,
+    })
+    use({
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+            })
+        end,
+    })
+    use({
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function()
             require("copilot_cmp").setup()
         end,
-        requires = "zbirenbaum/copilot-cmp",
     })
 
     use("tpope/vim-markdown")
     use({
         "hrsh7th/nvim-cmp",
         requires = {
-            -- "hrsh7th/cmp-nvim-lsp-signature-help",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lsp",
@@ -176,11 +196,21 @@ local intellisense = function(use)
             require("lsp-inlayhints").setup()
         end,
     })
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+            require("configs/lsp/nullls").setup()
+        end,
+    })
 end
 
 local vim_plugin_utilities = function(use)
     use("wbthomason/packer.nvim")
     use("nvim-lua/plenary.nvim")
+    use("almo7aya/openingh.nvim")
+    use({
+        "nvim-pack/nvim-spectre",
+    })
     use({
         "tpope/vim-scriptease",
         cmd = {
@@ -193,6 +223,10 @@ end
 
 local motion = function(use)
     use("unblevable/quick-scope")
+    -- use { "chrisgrieser/nvim-spider" }
+    -- vim.keymap.set({"n", "o", "x"}, "w", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
+    -- vim.keymap.set({"n", "o", "x"}, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
+    -- vim.keymap.set({"n", "o", "x"}, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
 end
 
 local git = function(use)
@@ -214,8 +248,32 @@ local git = function(use)
 end
 
 local project = function(use)
-    use("embear/vim-localvimrc")
+    -- use("embear/vim-localvimrc")
     use("tpope/vim-projectionist")
+    use({
+        "nvim-neorg/neorg",
+        config = function()
+            require("neorg").setup({
+                load = {
+                    ["core.defaults"] = {}, -- Loads default behaviour
+                    ["core.export"] = {},
+                    ["core.summary"] = { config = { strategy = "metadata" } },
+                    ["core.completion"] = { config = { engine = "nvim-cmp", name = "[Neorg]" } },
+                    ["core.concealer"] = { config = { icon_preset = "diamond" } }, -- Adds pretty icons to your documents
+                    ["core.dirman"] = { -- Manages Neorg workspaces
+                        config = {
+                            workspaces = {
+                                work = "~/notes/work",
+                                home = "~/notes/home",
+                            },
+                        },
+                    },
+                },
+            })
+        end,
+        run = ":Neorg sync-parsers",
+        requires = "nvim-lua/plenary.nvim",
+    })
 end
 --- startup and add configure plugins
 packer.startup(function()
@@ -231,6 +289,7 @@ packer.startup(function()
     git(use)
     motion(use)
     project(use)
+    database(use)
 
     use({
         "kyazdani42/nvim-tree.lua",
@@ -287,3 +346,5 @@ packer.startup(function()
         keys = { "gJ", "gS" },
     })
 end)
+
+

@@ -23,10 +23,10 @@ end
 map_tele("<leader>ff", "git_files")
 map_tele("<leader>fF", "file_browser", { hidden = true, depth = false })
 map_tele("<leader>fe", "git_status")
-map_tele("<leader>fb", "buffers")
+map_tele("<C-p>", "buffers")
 map_tele("<leader>ev", "edit_neovim")
-map_tele("<leader>fN", "file_browser")
 map_tele("<leader>ft", "design_system")
+map_tele("<leader>fo", "oldfiles")
 
 map_tele("??", "live_grep")
 map_tele("//", "curbuf")

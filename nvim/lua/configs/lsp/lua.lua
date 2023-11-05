@@ -14,7 +14,7 @@ local sumneko_root_path = "/media/disk/home/mathieu/Sources/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
 
 local init = function(custom_attach)
-    lspconfig.sumneko_lua.setup({
+    lspconfig.lua_ls.setup({
         on_attach = custom_attach,
         cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
         commands = {

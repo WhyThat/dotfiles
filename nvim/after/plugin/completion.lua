@@ -24,7 +24,7 @@ cmp.setup({
 
         -- TODO: Not sure I'm in love with this one.
         ["<C-Space>"] = cmp.mapping.complete(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<Tab>"] = cmp.mapping(function(fallback)
@@ -50,15 +50,34 @@ cmp.setup({
     },
 
     sources = {
+        { name = "copilot" },
         { name = "nvim_lsp" },
         { name = "buffer" },
         { name = "path" },
-        { name = "orgmode" },
-        { name = "copilot" },
         -- { name = "nvim_lua" },
+        { name = "neorg" },
         { name = "luasnip" },
         { name = "nvim_lsp_signature_help" },
     },
+    -- sorting = {
+    --     priority_weight = 2,
+    --     comparators = {
+    --         require("copilot_cmp.comparators").prioritize,
+    --         require("copilot_cmp.comparators").score,
+    --
+    --         -- Below is the default comparitor list and order for nvim-cmp
+    --         cmp.config.compare.offset,
+    --         -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+    --         cmp.config.compare.exact,
+    --         cmp.config.compare.score,
+    --         cmp.config.compare.recently_used,
+    --         cmp.config.compare.locality,
+    --         cmp.config.compare.kind,
+    --         cmp.config.compare.sort_text,
+    --         cmp.config.compare.length,
+    --         cmp.config.compare.order,
+    --     },
+    -- },
     formatting = {
         -- Youtube: How to set up nice formatting for your sources.
         format = lspkind.cmp_format({
@@ -77,6 +96,6 @@ cmp.setup({
     experimental = {
         native_menu = false,
 
-        ghost_text = true,
+        -- ghost_text = true,
     },
 })

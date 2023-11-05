@@ -41,8 +41,10 @@ local toggle = function()
     end
 end
 
+
 return {
     toggle = toggle,
     setLight = setLight,
     setDark = setDark,
 }
+

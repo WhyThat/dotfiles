@@ -1,28 +1,29 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.opt.list = true
 vim.opt.listchars = {
-  eol = nil, --'↴',
-  tab = '» ',
-  extends = '›',
-  precedes = '‹',
-  trail = '•',
+    eol = nil, --'↴',
+    tab = "» ",
+    extends = "›",
+    precedes = "‹",
+    trail = "•",
 }
 
 vim.opt.fillchars = {
-  eob = '~',
-  foldopen = '▾',
-  foldsep = '│',
-  foldclose = '▸',
-  msgsep = ' ',
+    eob = "~",
+    foldopen = "▾",
+    foldsep = "│",
+    foldclose = "▸",
+    msgsep = " ",
 }
 
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = "unnamedplus"
 
-vim.opt.inccommand = 'nosplit' -- incremental live completion
+vim.opt.inccommand = "nosplit" -- incremental live completion
 vim.opt.number = true
 vim.opt.hidden = true
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 vim.opt.mousefocus = true
 
 vim.opt.swapfile = false
@@ -30,38 +31,38 @@ vim.opt.swapfile = false
 vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
-vim.opt.encoding = 'utf-8'
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.encoding = "utf-8"
+vim.opt.clipboard = "unnamedplus"
 vim.opt.pumheight = 15
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.opt.wildignorecase = true
 vim.opt.wildignore = vim.opt.wildignore
-  + {
-    '*.aux',
-    '*.out',
-    '*.toc',
-    '*.o',
-    '*.obj',
-    '*.dll',
-    '*.jar',
-    '*.pyc',
-    '*.rbc',
-    '*.class',
-    '*.gif',
-    '*.ico',
-    '*.jpg',
-    '*.jpeg',
-    '*.png',
-    '*.avi',
-    '*.wav',
-    '*.*~',
-    '*~ ',
-    '*.swp',
-    '.lock',
-    '.DS_Store',
-    'tags.lock',
-  }
+    + {
+        "*.aux",
+        "*.out",
+        "*.toc",
+        "*.o",
+        "*.obj",
+        "*.dll",
+        "*.jar",
+        "*.pyc",
+        "*.rbc",
+        "*.class",
+        "*.gif",
+        "*.ico",
+        "*.jpg",
+        "*.jpeg",
+        "*.png",
+        "*.avi",
+        "*.wav",
+        "*.*~",
+        "*~ ",
+        "*.swp",
+        ".lock",
+        ".DS_Store",
+        "tags.lock",
+    }
 
 vim.opt.showmode = true
 vim.opt.showcmd = true
@@ -71,6 +72,12 @@ vim.opt.splitright = true
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 3
 
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 
-
-
+vim.g.vimade = {
+    fadelevel = 0.5,
+    enabletreesitter = 1,
+    basebg = "#ADD8E6"
+}

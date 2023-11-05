@@ -1,82 +1,63 @@
+
 [
+  ; (for_expression)
+  ; (while_expression)
+  (if_expression)
+  (let_binding)
+  ; (switch_expression)
+  (expression_statement)
   (array)
   (call_expression)
   (list)
   (module_declaration)
-  (block)
   (record)
-  (ternary_expression)
-  ; (type_declaration)
-  (formal_parameters)
   (variant)
-  (variant_declaration)
-  (function_type)
-  (polyvar_type)
-] @indent
-
-; (record) @indent
-(record (record_field) @indent)
-; (type_declaration) @indent
-; (arguments (block) @indent)
+  ; (block)
+  (type_declaration)
+  (ternary_expression)
+] @indent.begin
 
 
-(ERROR (type_identifier)) @indent
+(try_expression (block) @indent.begin)
 
-; (formal_parameters) @indent
-
-
-; (variant) @indent
-; (variant_declaration) @auto
-
-; (binary_expression) @auto
-
-; ((variant_declaration) @aligned_indent
-;   (#set! "delimiter" "|"))
-
-; (type_declaration) @auto
-; (switch_match) @indent
-
-
-; (function_type) @indent
-; (polyvar_type) @indent
-
-(function
-  body: (_) @_body
-  (#not-has-type? @_body block)
-) @indent
-
-; (switch_match
-;   body: (_) @_body
-;   (#not-has-type? @_body statement_block)
-; ) @indent
-
-; (let_binding
-;   (function)) @indent
 ; (switch_expression) @auto
 
-; (function body: (block)) @indent
+; (switch_match
+;   body: (sequence_expression) @indent)
+
+; (record (record_field) @indent)
+; (arguments (block) @indent)
+; (ternary_expression) @indent
+
+; align indent a ? {} : {}
+(ternary_expression
+  consequence: ((block) @indent.align (#set! "delimiter" "{"))
+  alternative: ((block) @indent.align (#set! "delimiter" "{")))
+
+
+
+
+; (object_type "}" @indent_end)
+; (record_type "}" @indent_end)
+; (record "}" @indent_end)
+; (block "}" @indent_end)
+; (list "}" @indent_end)
 
 [
-  ; "("
   ")"
-  ; "}"
-  "]"
-  ; (else_clause)
-  ; (else_if_clause)
-  (record)
-] @branch
-
-(block "{" @branch)
-
-[
   "}"
   "]"
-  ")"
-] @indent_end
+] @indent.branch
+(block "{" @indent.branch)
+
+[ "]" "}" ")" ] @indent.end
 
 [
+  (comment)
+  (template_string)
+] @indent.ignore
+
+[
+  (variant_declaration)
   (ERROR)
-  (switch_expression)
-  (type_declaration)
-  (binary_expression)
-] @auto
+] @indent.auto

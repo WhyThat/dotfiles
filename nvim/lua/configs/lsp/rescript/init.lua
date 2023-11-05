@@ -32,13 +32,13 @@ M.init = function(custom_attach)
         commands = {
             StartReanalyze = {
                 function()
-                    require("./reanalyze").start()
+                    require("configs/lsp/rescript/reanalyze").start()
                 end,
                 description = "Start Reanalyze",
             },
             StopReanalyze = {
                 function()
-                    require("configs/reanalyze").stop()
+                    require("configs/lsp/rescript/reanalyze").stop()
                 end,
                 description = "Stop Reanalyze",
             },

@@ -1,3 +1,15 @@
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.rescript = {
+    install_info = {
+        url = "https://github.com/nkrkv/tree-sitter-rescript",
+        branch = "main",
+        files = { "src/parser.c", "src/scanner.c" },
+        requires_generate_from_grammar = true,
+    },
+    filetype = "rescript",
+}
+--
 -- Load custom tree-sitter grammar for org filetype
 local m = require("markid")
 
@@ -45,13 +57,20 @@ local rescriptQueries = [[
                (formal_parameters (parameter (labeled_parameter (value_identifier) @markid)))
                ]
   )
+
+((module_identifier) @markid)
+((jsx_identifier) @markid)
 (let_binding (value_identifier) @markid)
 (pipe_expression (value_identifier) @markid)
 (record (record_field (property_identifier) @markid))
 (variant (arguments (value_identifier) @markid))
 (jsx_attribute (property_identifier) @markid)
 (let_binding (tuple_pattern (tuple_item_pattern (value_identifier) @markid)) )
-(value_identifier) @markid
+((value_identifier) @markid)
+((variant_identifier) @markid)
+((type_identifier) @markid)
+((property_identifier) @markid)
+
 ]]
 
 local javascriptMarkidQueries = [[
@@ -60,6 +79,13 @@ local javascriptMarkidQueries = [[
   (property_identifier) @markid
   (shorthand_property_identifier_pattern) @markid
   (shorthand_property_identifier) @markid
+]]
+
+local typescriptMarkidQueries = [[
+  ((identifier) @markid)
+  ((type_identifier) @markid)
+  ((type_annotation) @markid)
+  ((property_identifier) @markid)
 ]]
 
 require("nvim-treesitter.configs").setup({
@@ -94,8 +120,11 @@ require("nvim-treesitter.configs").setup({
         enable = true,
         colors = colors,
         queries = {
-            rescript = rescriptQueries,
+            default = "(identifier) @markid",
+            javascript = javascriptMarkidQueries,
+            typescript = typescriptMarkidQueries,
             typescriptreact = javascriptMarkidQueries,
+            rescript = rescriptQueries,
         },
     },
     playground = {
@@ -160,9 +189,13 @@ require("nvim-biscuits").setup({
     },
 })
 
-m.queries = {
-  default = '(identifier) @markid',
-  javascript = javascriptMarkidQueries
-}
-m.queries.typescript = javascriptMarkidQueries
-m.queries.typescriptreact = javascriptMarkidQueries
+-- m.queries = {
+--     default = "(identifier) @markid",
+--     javascript = javascriptMarkidQueries,
+--     typescript = javascriptMarkidQueries,
+--     typescriptreact = javascriptMarkidQueries,
+--     rescript = rescriptQueries,
+-- }
+-- m.queries.rescript = rescriptQueries
+-- m.queries.typescript = javascriptMarkidQueries
+-- m.queries.typescriptreact = javascriptMarkidQueries
