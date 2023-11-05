@@ -13,12 +13,12 @@ telescope.setup({
         },
     },
     extensions = {
-        fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case",
-        },
+        -- fzf = {
+        --     fuzzy = true,
+        --     override_generic_sorter = true,
+        --     override_file_sorter = true,
+        --     case_mode = "smart_case",
+        -- },
         file_browser = {
             theme = "ivy",
             -- disables netrw and use telescope-file-browser in its place
@@ -34,12 +34,14 @@ telescope.setup({
         },
     },
     pickers = {
-        lsp_references = { theme = "get_cursor" },
-        lsp_definitions = { theme = "dropdown", layout_config = {
-            width = 0.8,
-        } },
-        diagnostics = { theme = "ivy" },
-        lsp_implementations = { theme = "dropdown" },
+        lsp_references = require("telescope.themes").get_ivy(),
+        lsp_definitions = require("telescope.themes").get_dropdown({
+            layout_config = {
+                width = 0.8,
+            },
+        }),
+        diagnostics = require("telescope.themes").get_ivy(),
+        lsp_implementations = require("telescope.themes").get_dropdown(),
         buffers = {
             sort_lastused = true,
             previewer = false,
@@ -48,3 +50,4 @@ telescope.setup({
 })
 telescope.load_extension("luasnip")
 telescope.load_extension("file_browser")
+telescope.load_extension("fzy_native")

@@ -11,83 +11,6 @@ parser_config.rescript = {
 }
 --
 -- Load custom tree-sitter grammar for org filetype
-local m = require("markid")
-
-local colors = {
-    "#DD6722",
-    "#81C71F",
-    "#116E1F",
-    "#1FC7B9",
-    "#2283DD",
-    "#461FC7",
-    "#BE1FC7",
-    "#657383",
-    "#342D7E",
-    "#578E8D",
-    "#8E5758",
-    "#678349",
-    "#654983",
-    "#8E8357",
-    "#4E577E",
-    "#785462",
-    "#54786A",
-    "#7A7C50",
-    "#5C5A8C",
-    "#B93B8F",
-    "#48CCCD",
-    "#79BAEC",
-    "#3EA99F",
-    "#736AFF",
-    "#667C26",
-    "#C68E17",
-    "#7E2217",
-    "#817339",
-}
-
-local rescriptQueries = [[
-(call_expression
-   arguments: [
-               (arguments (labeled_argument label: (_) @markid !value) )
-               (arguments (value_identifier ) @markid )
-               ]
-   )
-(function
-  parameters: [
-               (formal_parameters (parameter (value_identifier) @markid))
-               (formal_parameters (parameter (labeled_parameter (value_identifier) @markid)))
-               ]
-  )
-
-((module_identifier) @markid)
-((jsx_identifier) @markid)
-(let_binding (value_identifier) @markid)
-(pipe_expression (value_identifier) @markid)
-(record (record_field (property_identifier) @markid))
-(variant (arguments (value_identifier) @markid))
-(jsx_attribute (property_identifier) @markid)
-(let_binding (tuple_pattern (tuple_item_pattern (value_identifier) @markid)) )
-((value_identifier) @markid)
-((variant_identifier) @markid)
-((type_identifier) @markid)
-((property_identifier) @markid)
-
-]]
-
-local javascriptMarkidQueries = [[
-  (type_identifer) @markid
-  (identifier) @markid
-  (property_identifier) @markid
-  (shorthand_property_identifier_pattern) @markid
-  (shorthand_property_identifier) @markid
-]]
-
-local typescriptMarkidQueries = [[
-  ((identifier) @markid)
-  ((type_identifier) @markid)
-  ((type_annotation) @markid)
-  ((property_identifier) @markid)
-]]
-
 require("nvim-treesitter.configs").setup({
     autotag = {
         enable = true,
@@ -118,14 +41,39 @@ require("nvim-treesitter.configs").setup({
     },
     markid = {
         enable = true,
-        colors = colors,
-        queries = {
-            default = "(identifier) @markid",
-            javascript = javascriptMarkidQueries,
-            typescript = typescriptMarkidQueries,
-            typescriptreact = javascriptMarkidQueries,
-            rescript = rescriptQueries,
+        colors = {
+            "#DD6722",
+            "#81C71F",
+            "#116E1F",
+            "#1FC7B9",
+            "#2283DD",
+            "#461FC7",
+            "#BE1FC7",
+            "#657383",
+            "#342D7E",
+            "#578E8D",
+            "#8E5758",
+            "#678349",
+            "#654983",
+            "#8E8357",
+            "#4E577E",
+            "#785462",
+            "#54786A",
+            "#7A7C50",
+            "#5C5A8C",
+            "#B93B8F",
+            "#48CCCD",
+            "#79BAEC",
+            "#3EA99F",
+            "#736AFF",
+            "#667C26",
+            "#C68E17",
+            "#7E2217",
+            "#817339",
         },
+        is_supported = function(lang)
+            return true
+        end,
     },
     playground = {
         enable = true,
@@ -188,14 +136,3 @@ require("nvim-biscuits").setup({
         rescript = {},
     },
 })
-
--- m.queries = {
---     default = "(identifier) @markid",
---     javascript = javascriptMarkidQueries,
---     typescript = javascriptMarkidQueries,
---     typescriptreact = javascriptMarkidQueries,
---     rescript = rescriptQueries,
--- }
--- m.queries.rescript = rescriptQueries
--- m.queries.typescript = javascriptMarkidQueries
--- m.queries.typescriptreact = javascriptMarkidQueries

@@ -1,5 +1,7 @@
+print("Loading options.lua")
+
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = ","
 
 vim.opt.list = true
 vim.opt.listchars = {
@@ -72,12 +74,8 @@ vim.opt.splitright = true
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 3
 
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-
 vim.g.vimade = {
     fadelevel = 0.5,
     enabletreesitter = 1,
-    basebg = "#ADD8E6"
+    basebg = "#ADD8E6",
 }

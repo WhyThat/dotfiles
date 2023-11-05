@@ -47,6 +47,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+local with_zz = function(func)
+    return function()
+        func()
+        vim.cmd("normal! zz")
+    end
+end
+
 local custom_attach = function(option)
     local ensuredOption = {}
     if not option then
@@ -68,16 +75,14 @@ local custom_attach = function(option)
             group = lsp_format,
             callback = function()
                 if not ensuredOption.formatCmd then
-                    vim.lsp.buf.format()
+                    with_zz(vim.lsp.buf.format)()
                 end
             end,
             buffer = bufnr,
         })
 
         if not ensuredOption.formatCmd then
-            vim.keymap.set("n", "<leader>=", function()
-                vim.lsp.buf.format()
-            end)
+            vim.keymap.set("n", "<leader>=", with_zz(vim.lsp.buf.format))
         else
             mapN("<leader>=", ensuredOption.formatCmd .. "<CR><CR>", true)
         end
@@ -87,11 +92,11 @@ local custom_attach = function(option)
         mapN("<leader>lr", "<cmd>Telescope lsp_references<CR>")
         mapN("<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>")
         mapN("gD", vim.lsp.buf.declaration)
-        mapN("gd", vim.lsp.buf.definition)
+        mapN("gd", with_zz(vim.lsp.buf.definition))
         mapN("K", vim.lsp.buf.hover)
         mapN("gs", vim.lsp.buf.signature_help)
         mapN("gi", vim.lsp.buf.implementation)
-        mapN("gt", vim.lsp.buf.type_definition)
+        mapN("gt", with_zz(vim.lsp.buf.type_definition))
         mapN("<leader>gW", vim.lsp.buf.workspace_symbol)
         mapN("<leader>af", vim.lsp.buf.code_action)
         mapN("<leader>ee", vim.diagnostic.get)

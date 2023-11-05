@@ -96,6 +96,7 @@ local telescope = function(use)
                 "nvim-lua/plenary.nvim",
                 "telescope-frecency.nvim",
                 "telescope-fzf-native.nvim",
+                "nvim-telescope/telescope-fzy-native.nvim",
             },
             wants = {
                 "popup.nvim",
@@ -206,6 +207,7 @@ end
 
 local vim_plugin_utilities = function(use)
     use("wbthomason/packer.nvim")
+    use("numToStr/prettierrc.nvim")
     use("nvim-lua/plenary.nvim")
     use("almo7aya/openingh.nvim")
     use({
@@ -223,16 +225,15 @@ end
 
 local motion = function(use)
     use("unblevable/quick-scope")
-    -- use { "chrisgrieser/nvim-spider" }
-    -- vim.keymap.set({"n", "o", "x"}, "w", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
-    -- vim.keymap.set({"n", "o", "x"}, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
-    -- vim.keymap.set({"n", "o", "x"}, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
 end
 
 local git = function(use)
     use("tpope/vim-fugitive")
     use("rhysd/git-messenger.vim")
-    use("mhinz/vim-signify")
+    use({
+        "lewis6991/gitsigns.nvim",
+    })
+    require("configs.gitsigns")
     use("sindrets/diffview.nvim")
     use({
         "pwntester/octo.nvim",
@@ -346,5 +347,3 @@ packer.startup(function()
         keys = { "gJ", "gS" },
     })
 end)
-
-
